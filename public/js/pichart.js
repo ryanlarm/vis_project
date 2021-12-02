@@ -56,7 +56,7 @@ PiChart.prototype.init = function() {
             .text(function(d) {
                 return  "Aircraft: " + d.data.aircraft + 
                         "\nCrashes: " + d.data.count;
-            })
+            });
 
     self.wrangleData();
 }
