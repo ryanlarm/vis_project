@@ -2,8 +2,9 @@ var timeline;
 var pichart;
 var linechart;
 
+var selectionEventHandler = {};
+
 var parseDate = d3.timeParse("%Y");
-var brushSelection;
 
 // Start app after loading data
 loadData();
@@ -13,13 +14,15 @@ function loadData() {
 
     d3.csv("data/crashes.csv").then(function(data) {
 
-        var years = [];
-        var planes = [];
-        var planesIndex = []; // Keeps track of index for given plane
+        let years = [];
+        let planes = [];
+        let planesIndex = []; // Keeps track of index for given plane
+        
 
         // Iterate through data counting fatalities per year for timeline
         // and line chart
         for (let i = 1908; i <= 2009; i++) {
+            let crashes = 0;
             const yearData = data.filter(e => e.Date.split("/")[2] == i);
 
             var fatalities = 0;
@@ -28,55 +31,29 @@ function loadData() {
                 if(element.Fatalities) {
                     fatalities += parseInt(element.Fatalities);
                 }
+                crashes += 1;
             });
             
             var tempDate = {
                 "date": date,
-                "year": date.getFullYear(),
+                "crashes": crashes,
                 "fatalities": fatalities
             };
             years.push(tempDate);
         }
 
-        // Get Plane type from data for pichart
-        data.forEach((e, i) => {
-
-            if(e.Type && e.Type !== "") {
-
-                let index = planesIndex.indexOf(e.Type);
-                if(index != -1) {
-                    planes[index].count += 1;
-                } else {
-
-                    let tempData = {
-                        "count": 1,
-                        "aircraft": e.Type,
-                        "year": e.Year
-                    }
-                    planes.push(tempData);
-                    planesIndex.push(e.Type);
-                }
-            }
+        // Fix dates
+        data.map((d) => {
+            d.Date = new Date(d.Date);
         });
         
-        timeline = new Timeline("timeline", years);
-        pichart = new PiChart("pichart", planes);
+        timeline = new Timeline("timeline", years, selectionEventHandler);
+        pichart = new PiChart("pichart", data);
         linechart = new LineChart("linechart", years);
+
+        $(selectionEventHandler).bind("selectionChanged", (_, rangeStart, rangeEnd) => {
+            linechart.onSelectionChange(rangeStart, rangeEnd);
+            pichart.onSelectionChange(rangeStart, rangeEnd);
+        });
     });
-}
-
-function brushed({selection}) {
-    brushSelection = selection;
-
-    // linechart.x.domain(
-    //     !selection ? timeline.x.domain() : selection.map(timeline.x.invert)
-    // );
-    // linechart.wrangleData();
-
-    // pichart.x.domain(
-    //     !selection ? timeline.x.domain() : selection.map(timeline.x.invert)
-    // );
-    // pichart.wrangleData();
-
-    
 }

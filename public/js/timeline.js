@@ -1,104 +1,121 @@
-
 /**
  * Constructor for the timeline
  * @param {string} _parentElement ID of the timeline div container
  * @param {[]} _data Array of deaths per year
+ * @param {} eventHandler Event Handler for selection changes when brushing
  */
-function Timeline(_parentElement, _data) {
+ function Timeline(_parentElement, _data, eventHandler) {
     let self = this;
     self.parent = _parentElement;
     self.displayData = _data;
+    self.eventHandler = eventHandler;
     self.init();
 }
-
 
 /**
  * Initializer for timeline
  */
 Timeline.prototype.init = function() {
-
     let self = this;
-    
-    let divTimeline = d3.select("#" + self.parent).classed("timeline", true);
-    
-    self.margin = {top: 10, right: 10, left: 10, bottom: 20};
-    self.svgBounds = divTimeline.node().getBoundingClientRect();
-    self.svgWidth = self.svgBounds.width - self.margin.left - self.margin.right;
-    self.svgHeight = 100;
+    timelineDiv = d3.select("#" + self.parent).classed("linechart", true);
 
-    self.svg = divTimeline.append("svg")
+    // Create SVG
+    self.margin = {top: 20, bottom: 20, left: 70, right: 20};
+    self.svgBounds = timelineDiv.node().getBoundingClientRect();
+    self.svgWidth = self.svgBounds.width - self.margin.left - self.margin.right;
+    self.svgHeight = 300 - self.margin.bottom - self.margin.top;
+
+    self.svg = timelineDiv.append("svg")
         .attr("width", self.svgWidth + self.margin.left + self.margin.right)
         .attr("height", self.svgHeight + self.margin.top + self.margin.bottom)
         .append("g")
-	    .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")");
-
-
-    // Scale and axes
-    self.x = d3.scaleTime()
-        .range([0, self.svgWidth])
-        .domain(
-            d3.extent(self.displayData, function(d) { return d.date; })
-        );
+            .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")");
     
+    // Axes and scales
     self.y = d3.scaleLinear()
         .range([self.svgHeight, 0])
         .domain([
             0,
-            d3.max(self.displayData, function(d) { return d.fatalities; })
-        ]);
-        
+            d3.max(self.displayData, function(d) {
+                return d.fatalities;
+            })]);
+    self.x = d3.scaleTime()
+        .range([0, self.svgWidth])
+        .domain(d3.extent(self.displayData, function(d) { return d.date; }));
     self.xAxis = d3.axisBottom()
         .scale(self.x);
+    self.yAxis = d3.axisLeft()
+        .scale(self.y);
 
-    self.area = d3.area()
-        .x(function(d) {return self.x(d.date); })
-        .y0(self.svgHeight)
-        .y1(function(d) {return self.y(d.fatalities); });
-    
-    self.svg.append("path")
-        .datum(self.displayData)
-        .attr("fill", "#b2a8c7")
-        .attr("d", self.area);
-
-
-    let brush = d3.brushX()
-        .extent([[0,0], [self.svgWidth, self.svgHeight]])
-        .on("brush end", brushed);
-
-    let brushGroup = self.svg.append("g")
-        .attr("class", "x brush")
-        .call(brush)
-        .selectAll("rect")
-            .attr("y", 0)
-            .attr("height", self.svgHeight)
-
-    // d3.select("body")
-    //         .on("wheel", function(d) {
-    //             // brushSelection[0] += (d.deltaY * -0.01);
-    //             // brushSelection[1] += (d.deltaY * -0.01);
-    //             brushSelection[0] += -1 * d.deltaY;
-    //             brushSelection[1] += -1 * d.deltaY;
-
-    //             // Only move the brush selection if it's actually on the screen
-    //             if(brushSelection) {
-    //                 if(d.deltaY < 0) { // Scroll up
-    //                     // console.log(brushSelection);
-                        
-    //                     // brushGroup.call(brush.move, function() {
-    //                     //     return [brushSelection];
-    //                     // });
-
-    //                 } else { // Scroll down
-                        
-    //                 }
-    //             }
-    //         });
-    
     self.svg.append("g")
         .attr("class", "x-axis axis")
-        .attr("transform", "translate(0, 100)")
-        .call(self.xAxis);
+        .attr("transform", "translate(0," + self.svgHeight + ")");
 
-        
+    self.svg.append("g")
+        .attr("class", "y-axis axis");
+
+
+    self.path = self.svg.append("path")
+            .attr("class", "timeline-path path");
+
+    // Area generator for the vis
+    self.area = d3.area()
+        .curve(d3.curveBasis)
+        .x(function(d) { return self.x(d.date); })
+        .y0(self.svgHeight)
+        .y1(function(d) { return self.y(d.fatalities); });
+
+    // Update domains for updated selections
+    let brush = d3.brushX()
+        .on("brush", function({selection}) {
+            if(selection == null) {
+                $(self.eventHandler).trigger("selectionChanged", self.x.domain());
+            } else {
+                $(self.eventHandler).trigger("selectionChanged", selection.map(self.x.invert));
+            }
+        })
+        .on("end", function(e) {
+
+            // Reset domain when brush is removed
+            if(e.selection == null) {
+                $(self.eventHandler).trigger("selectionChanged", self.x.domain());
+            }
+        });
+
+    self.svg.append("g")
+        .call(brush)
+        .selectAll("rect")
+            .attr("height", self.svgHeight);
+
+    self.wrangleData();
 }
 
+Timeline.prototype.wrangleData = function() {
+    let self = this;
+    self.updateVis();
+}
+
+/**
+ * Renders the timeline
+ */
+Timeline.prototype.updateVis = function() {
+    let self = this;
+
+    // Draw the timeline
+    self.path.datum(self.displayData)
+        .attr("d", self.area);
+        
+    self.svg.select(".x-axis").call(self.xAxis);
+    self.svg.select(".y-axis").call(self.yAxis);
+
+}
+
+/**
+ * Event handler for when brushed selection is changed
+ * @param {*} selectionStart 
+ * @param {*} selectionEnd 
+ */
+Timeline.prototype.onSelectionChange = function(selectionStart, selectionEnd) {
+    let self = this;
+    self.wrangleData();
+}
