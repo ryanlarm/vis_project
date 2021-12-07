@@ -66,6 +66,16 @@ h2 {
     margin: 15px 0px 0px 0px;
 }
 
+h2.one {
+    font-family: "Space Mono";
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 28px;
+    margin: 15px 0px 0px 0px;
+}
+
 h3 {
     font-family: "Space Mono";
     font-weight: normal;
@@ -307,12 +317,33 @@ path.range  {
     align-content: center;
 }
 
-.x-axis axis1 {
-    font-family: "Space Mono";
-    color: #431da1;
+#bubblechart {
+    align-content: center;
+    margin-top: 40px;
+    margin-left: 50px;
+    background: linear-gradient(225deg, rgba(12, 52, 255, 0.29) 0%, rgba(215, 96, 255, 0.15) 100%);
+    border: 1px solid rgba(58, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow:
+        /*inset 0 0 200px rgba(234, 234, 234, 0.26),*/
+        /*inset 100px 0 70px rgba(255, 0, 255, 0.11),*/
+        /*inset -60px 0 60px rgba(0, 129, 129, 0.42)*/
+        /*    inset 20px 0 100px rgba(134, 28, 248, 0.29),*/
+        /*inset -100px 0 200px rgba(4, 183, 183, 0.22);*/
+            0 0px 20px rgba(255, 255, 255, 0.11);
+}
+
+circle.bubbles {
+    stroke-width: .5px;
+    stroke: white;
+    fill: rgba(59, 255, 249, 0.11);
+}
+
+circle.bubbles:hover {
+    stroke: #0708e8;
+    stroke-width: 1px;
+    fill: rgba(145, 140, 255, 0.71);
 }
 
 
-.timeline-path {
-    background: linear-gradient(180deg, rgba(182,161,255,1) 0%, rgba(237,231,255,1) 31%, rgba(255,255,255,1) 100%);
-}
+
