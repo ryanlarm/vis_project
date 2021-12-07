@@ -66,6 +66,28 @@ LineChart.prototype.init = function() {
     self.svg.append("g")
         .attr("class", "y-axis axis");
 
+   self.svg.append("text")
+        .attr("class", "axis-title")
+        .attr("x", -120)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("dy", ".1em")
+        .attr("font-family", "Space Mono")
+        .attr("fill", "white")
+        .style("text-anchor", "end")
+        .text("# of CRASHES");
+
+    self.svg.append("text")
+        .attr("class", "axis-title")
+        .attr("x", 400)
+        .attr("y", 477)
+        .attr("dy", ".1em")
+        .attr("font-family", "Space Mono")
+        .attr("font-style", "italic")
+        .attr("fill", "white")
+        .style("text-anchor", "end")
+        .text("year");
+
     self.wrangleData();
 }
 
@@ -80,13 +102,15 @@ LineChart.prototype.updateVis = function() {
         return d.crashes;
     }));
 
+
+
     self.path.datum(self.displayData)
         .transition()
             .duration(1000)
         .attr("d", self.lineGenerator)
         .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", "2px");
+        .attr("stroke", "white")
+        .attr("stroke-width", "1px")
 
     self.svg.select(".x-axis").call(self.xAxis);
     self.svg.select(".y-axis").call(self.yAxis);

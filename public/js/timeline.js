@@ -20,16 +20,17 @@ Timeline.prototype.init = function() {
     timelineDiv = d3.select("#" + self.parent).classed("linechart", true);
 
     // Create SVG
-    self.margin = {top: 20, bottom: 20, left: 70, right: 20};
+    self.margin = {top: 20, bottom: 20, left: 80, right: 20};
     self.svgBounds = timelineDiv.node().getBoundingClientRect();
-    self.svgWidth = self.svgBounds.width - self.margin.left - self.margin.right;
-    self.svgHeight = 300 - self.margin.bottom - self.margin.top;
+    // self.svgWidth = self.svgBounds.width - self.margin.left - self.margin.right;
+    self.svgWidth = 1400 - self.margin.left - self.margin.right;
+    self.svgHeight = 150 - self.margin.bottom - self.margin.top;
 
     self.svg = timelineDiv.append("svg")
         .attr("width", self.svgWidth + self.margin.left + self.margin.right)
         .attr("height", self.svgHeight + self.margin.top + self.margin.bottom)
         .append("g")
-            .attr("transform", "translate(" + self.margin.left + "," + self.margin.top + ")");
+            .attr("transform", "translate(80," + self.margin.top + ")");
     
     // Axes and scales
     self.y = d3.scaleLinear()
@@ -42,21 +43,32 @@ Timeline.prototype.init = function() {
     self.x = d3.scaleTime()
         .range([0, self.svgWidth])
         .domain(d3.extent(self.displayData, function(d) { return d.date; }));
+
     self.xAxis = d3.axisBottom()
-        .scale(self.x);
+        .scale(self.x)
+        .tickSize(-110);
+
+
+
     self.yAxis = d3.axisLeft()
-        .scale(self.y);
+        .scale(self.y)
+        .ticks(4);
+
 
     self.svg.append("g")
-        .attr("class", "x-axis axis")
+        .attr("class", "x-axis")
         .attr("transform", "translate(0," + self.svgHeight + ")");
 
     self.svg.append("g")
         .attr("class", "y-axis axis");
 
-
     self.path = self.svg.append("path")
-            .attr("class", "timeline-path path");
+            .attr("fill", "rgba(55,239,224,0.15)")
+            .attr("stroke", "rgba(14,232,232,0.79)")
+            .attr("stroke-width", 1.5)
+            .attr("class", "timeline-path")
+
+
 
     // Area generator for the vis
     self.area = d3.area()

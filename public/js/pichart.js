@@ -28,16 +28,18 @@ PiChart.prototype.init = function() {
 
     let piChartDiv = d3.select("#" + self.parent).classed("pichart", true);
 
-    self.margin = {top: 10, left: 10, right: 10, bottom: 10};
+    self.margin = {top: 40, left: 10, right: 10, bottom: 10};
     self.svgBounds = piChartDiv.node().getBoundingClientRect();
-    self.svgWidth = (self.svgBounds.width / 2) - self.margin.left - self.margin.right;
-    self.svgHeight = self.svgWidth;
+    // self.svgWidth = (self.svgBounds.width / 2) - self.margin.left - self.margin.right;
+    // self.svgHeight = self.svgWidth;
+    self.svgWidth = 600 - self.margin.left - self.margin.right;
+    self.svgHeight = 500 - self.margin.bottom - self.margin.top;
 
     self.svg = piChartDiv.append("svg")
         .attr("width", self.svgWidth + self.margin.left + self.margin.right)
-        .attr("height", self.svgHeight + self.margin.left + self.margin.right)
+        .attr("height", self.svgHeight + self.margin.top + self.margin.bottom)
         .append("g")
-            .attr("transform", "translate(" + self.svgWidth / 2 + "," + self.svgHeight / 2 + ")");
+            .attr("transform", "translate(" + self.svgWidth / 1.8 + "," + self.svgHeight / 1.8 + ")");
 
     self.getData(self.data[0].Date, self.data[self.data.length - 1].Date);
 
@@ -55,7 +57,7 @@ PiChart.prototype.init = function() {
         });
 
     self.arc = d3.arc()
-        .innerRadius(radius / 2)
+        .innerRadius(radius / 1.3)
         .outerRadius(radius);
 
     self.arcs = self.svg.selectAll("arc")
@@ -131,7 +133,7 @@ PiChart.prototype.updateVis = function() {
             return self.colors(d.value);
         })
         .attr("d", self.arc)
-        .attr("stroke", "black");
+        .attr("stroke", "white");
 }
 
 /**
