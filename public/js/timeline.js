@@ -69,6 +69,30 @@ Timeline.prototype.init = function() {
             .attr("class", "timeline-path")
 
 
+    self.svg.append("text")
+        .attr("class", "axis-title")
+        .attr("x", -10)
+        .attr("y", -50)
+        .attr("transform", "rotate(-90)")
+        .attr("dy", ".1em")
+        .attr("font-family", "Space Mono")
+        .attr("font-size", "11px")
+        .attr("font-style", "italic")
+        .attr("fill", "rgba(55,239,224,0.76)")
+        .style("text-anchor", "end")
+        .text("# of fatalities");
+
+    self.svg.append("text")
+        .attr("class", "axis-title")
+        .attr("x", 300)
+        .attr("y", 477)
+        .attr("dy", ".1em")
+        .attr("font-family", "Space Mono")
+        .attr("font-style", "italic")
+        .attr("font-size", "14px")
+        .attr("fill", "rgba(55,239,224,0.15)")
+        .style("text-anchor", "end")
+        .text("YEAR");
 
     // Area generator for the vis
     self.area = d3.area()
