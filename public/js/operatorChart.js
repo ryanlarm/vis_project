@@ -4,8 +4,8 @@ var margin = {
         bottom: 80,
         left: 65
     },
-    width = 818 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 960 - margin.left - margin.right,
+    height = 450 - margin.top - margin.bottom;
 
 var svg = d3.select("#operatorChart").append("svg")
     .attr("width", width + margin.left + margin.right)
