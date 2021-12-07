@@ -177,6 +177,7 @@ a.selected{
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     border: 1px dotted rgb(0, 255, 234);
+    padding: 7px;
     box-shadow:
             /*inset 0 0 200px rgba(234, 234, 234, 0.26),*/
             /*inset 100px 0 70px rgba(255, 0, 255, 0.11),*/
@@ -196,6 +197,28 @@ a.selected{
     -webkit-backdrop-filter: blur(40px);
     border: .5px solid rgba(232, 242, 240, 0.24);
     /*box-shadow: 0 0 20px rgba(199, 255, 255, 0.31);*/
+    margin-left: 0px;
+    padding-left: 40px;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 20px;
+}
+
+path.domain  {
+    stroke: #34b3c4;
+}
+
+path.range  {
+    stroke: rgba(52, 179, 196, 0.27);
+}
+.tick text {
+    fill: #e4e2ff;
+    font-family: "HK Grotesk";
+    font-size: 10px;
+}
+
+.tick line {
+    stroke: rgba(75, 111, 255, 0.45);
 }
 
 #pichart {
@@ -206,14 +229,14 @@ a.selected{
 
 #operatorChart {
     /*float: left;*/
-    width: 100%;
+    /*width: 100%;*/
     /*padding: 0 20px;*/
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 30px;
 }
 
 #operatorDetails {
-    float: left;
+    /*float: left;*/
     width: 500px;
     height: 600px;
     /*display: flex;*/
@@ -236,6 +259,14 @@ a.selected{
 
 }
 
+.operatorChartSvg {
+    width: 790px;
+    /*margin-left:30px;*/
+    padding-left: 10px;
+}
+
+
+
 #incidentsTitle {
     font-size: 20px;
     margin-bottom: 20px;
@@ -243,10 +274,6 @@ a.selected{
     margin-left: 10px;
     /*float: left;*/
     /*width: 60%;*/
-}
-
-.operatorChartSvg {
-    padding-left: 50px;
 }
 
 .form-select {
@@ -269,9 +296,6 @@ a.selected{
     color: #431da1;
 }
 
-.linechartstyle {
-    stroke-width: 1px;
-}
 
 .timeline-path {
     background: linear-gradient(180deg, rgba(182,161,255,1) 0%, rgba(237,231,255,1) 31%, rgba(255,255,255,1) 100%);
