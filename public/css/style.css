@@ -1,0 +1,274 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-x:hidden;
+    position:relative;
+    /*background: #12073b;*/
+    background-color: #12073b;
+}
+
+/*.heading {*/
+/*    display: flex;*/
+/*    margin: 10px;*/
+/*    justify-content: space-between;*/
+/*    background-color: #e9e3ff;*/
+/*    color: #2c0085;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+nav{
+    position: absolute;
+    top: 15px; left: 1050px;
+    height:40px;
+    width: 340px;
+    display: flex;
+    margin-top: 10px;
+    /*justify-content: space-between;*/
+    background-color: #e9e3ff;
+    color: #2c0085;
+    border-radius: 10px;
+
+}
+
+h1 {
+    font-family: "HK Grotesk";
+    font-weight: lighter;
+    letter-spacing: 8px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 25px;
+    margin: 30px 0px 0px 0px;
+}
+
+h2 {
+    font-family: "Space Mono";
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 36px;
+    margin: 15px 0px 0px 0px;
+}
+
+h3 {
+    font-family: "Space Mono";
+    font-weight: normal;
+    letter-spacing: 3px;
+    /*color: rgba(255, 255, 255, 0.96);*/
+    text-align: center;
+    font-size: 13px;
+    margin: 0px 5px 10px 10px;
+}
+
+h4 {
+    font-family: "Space Mono";
+    font-weight: normal;
+    letter-spacing: 1px;
+    height:20px;
+    width: 200px;
+    /*background-color: #e9e3ff;*/
+    color: #00cfec;
+    text-align: left;
+    font-size: 13px;
+    margin-left: 15px;
+}
+
+h5 {
+    font-family: "Space Mono";
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 16px;
+    margin: 15px 0px 0px 0px;
+}
+
+
+.wrapper {
+    height: 100%;
+    /*background: #263729;*/
+}
+.page {
+    float:left;
+    /*background: #992213;*/
+    background-size: cover;
+    min-height: 100%;
+    padding-top: 0px;
+}
+#page-1 {
+    background: #12073b;
+    min-height: 100%;
+    /*background: linear-gradient(-45deg, rgb(49, 49, 49) 0%, rgb(33, 33, 33) 100%);*/
+}
+
+#page-2 {
+    background: #12073b;
+    min-height: 100%;
+}
+
+
+#page-3 {
+    background: #12073b;
+    min-height: 100%;
+}
+
+a {
+    font-family: "Space Mono";
+    font-weight: normal;
+    letter-spacing: 3px;
+    color: rgb(29, 17, 138);
+    text-align: center;
+    font-size: 13px;
+    margin: 10px 0px 10px 20px;
+}
+
+a.selected{
+    font-family: "Space Mono";
+    font-weight: bolder;
+    letter-spacing: 3px;
+    color: rgb(29, 17, 138);
+    text-align: center;
+    font-size: 14px;
+    margin: 10px 0px 10px 20px;
+}
+
+
+.simulate{
+    height:2000px;
+}
+
+.column1 {
+    flex: 50%;
+    padding: 5px 25px;
+    /*background-color: #d3e8e3;*/
+    /*border: 3px solid #8575ee;*/
+    /*border-radius: 0px 40px 40px 0px;*/
+    margin-right: 3px;
+}
+
+.column2 {
+    flex: 50%;
+    padding: 5px 25px;
+    /*background-color: #daefea;*/
+    /*border: 3px solid #5b24cb;*/
+    /*border-radius: 40px 0px 0px 40px;*/
+    margin-left: 3px;
+}
+
+/*!* Clear floats after the columns *!*/
+/*.row:after {*/
+/*    content: "";*/
+/*    display: table;*/
+/*    clear: both;*/
+/*}*/
+
+.row {
+    display: flex;
+    margin: 35px 30px 0px 20px;
+    justify-content: space-between;
+}
+
+#timeline {
+    position: relative;
+    /* From https://css.glass */
+    background: linear-gradient(225deg, rgba(103, 148, 245, 0.16) 0%, rgba(28, 37, 210, 0.24) 100%);
+    border-radius: 23px;
+    /*box-shadow: 0 4px 30px rgba(255, 255, 255, 0.76);*/
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px dotted rgb(0, 255, 234);
+    box-shadow:
+            /*inset 0 0 200px rgba(234, 234, 234, 0.26),*/
+            /*inset 100px 0 70px rgba(255, 0, 255, 0.11),*/
+            /*inset -60px 0 60px rgba(0, 129, 129, 0.42),*/
+            /*inset 20px 0 100px rgba(134, 28, 248, 0.29),*/
+            inset -100px 0 200px rgba(4, 183, 183, 0.22);
+            /*0 0px 20px rgba(255, 255, 255, 0.11);*/
+}
+
+#linechart {
+    /*float: none;*/
+    /* From https://css.glass */
+    background: linear-gradient(225deg, rgba(96, 241, 255, 0.66) 0%, rgba(214, 216, 255, 0.15) 100%);
+    border-radius: 12px;
+    /*box-shadow: 0 4px 30px rgba(162, 157, 173, 0.1);*/
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: .5px solid rgba(232, 242, 240, 0.24);
+    /*box-shadow: 0 0 20px rgba(199, 255, 255, 0.31);*/
+}
+
+#pichart {
+    width: 500px;
+    height: 550px;
+}
+
+
+#operatorChart {
+    /*float: left;*/
+    width: 100%;
+    /*padding: 0 20px;*/
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+#operatorDetails {
+    float: left;
+    width: 500px;
+    height: 600px;
+    /*display: flex;*/
+    align-content: center;
+    /*padding: 15px;*/
+    margin-top: 30px;
+    /*margin-left: 10px;*/
+    margin-right: 10px;
+    /* text-align: center; */
+    background: linear-gradient(225deg, rgba(12, 231, 255, 0.29) 0%, rgba(226, 214, 255, 0.15) 100%);
+    border: 1px solid rgba(58, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow:
+        /*inset 0 0 200px rgba(234, 234, 234, 0.26),*/
+        /*inset 100px 0 70px rgba(255, 0, 255, 0.11),*/
+        /*inset -60px 0 60px rgba(0, 129, 129, 0.42)*/
+        /*    inset 20px 0 100px rgba(134, 28, 248, 0.29),*/
+            /*inset -100px 0 200px rgba(4, 183, 183, 0.22);*/
+            0 0px 20px rgba(255, 255, 255, 0.11);
+
+}
+
+#incidentsTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    /*float: left;*/
+    /*width: 60%;*/
+}
+
+.form-select {
+    color: white;
+    background-color: rgba(73, 60, 255, 0.35);
+    box-shadow:
+    inset 20px 0 100px rgba(134, 28, 248, 0.29),
+    inset -100px 0 200px rgba(4, 183, 183, 0.22),
+    0 0px 20px rgba(255, 255, 255, 0.11);
+    font-size: 17px;
+    border-radius: 6px;
+    border-width: 0px;
+    font-family: "Space Mono";
+    padding: 10px;
+    align-content: center;
+}
+
+.x-axis axis1 {
+    font-family: "Space Mono";
+    color: #431da1;
+}
+
+.linechartstyle {
+    stroke-width: 1px;
+}
+
+.timeline-path {
+    background: linear-gradient(180deg, rgba(182,161,255,1) 0%, rgba(237,231,255,1) 31%, rgba(255,255,255,1) 100%);
+}
