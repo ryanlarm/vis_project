@@ -1,6 +1,7 @@
 var timeline;
 var pichart;
 var linechart;
+var bubblechart;
 
 var selectionEventHandler = {};
 
@@ -69,6 +70,7 @@ function loadData() {
         timeline = new Timeline("timeline", years, selectionEventHandler);
         pichart = new PiChart("pichart", data);
         linechart = new LineChart("linechart", years);
+        bubblechart = new BubbleChart("bubblechart", data);
 
         $(selectionEventHandler).bind("selectionChanged", (_, rangeStart, rangeEnd) => {
             linechart.onSelectionChange(rangeStart, rangeEnd);
