@@ -43,9 +43,11 @@ PiChart.prototype.init = function() {
 
     self.getData(self.data[0].Date, self.data[self.data.length - 1].Date);
 
+    // let colors = ["#0d0887","#41049d","#6a00a8","#8f0da4","#b12a90","#cc4778","#e16462","#f2844b","#fca636","#fcce25","#f0f921"]
+    let colors1 = ["#610bd0","#281dc5","#292cf5","#368ce1","#23abd8","#1ac7c2","#1ddfa3","#30ef82","#52f667","#7ff658","#aff05b"]
     let radius = Math.min(self.svgWidth, self.svgHeight) / 2;
     self.colors = d3.scaleOrdinal()
-        .range(d3.schemeAccent)
+        .range(colors1)
         .domain([
             0,
             d3.max(self.displayData, function(d) {return d.count; })
@@ -133,7 +135,8 @@ PiChart.prototype.updateVis = function() {
             return self.colors(d.value);
         })
         .attr("d", self.arc)
-        .attr("stroke", "white");
+        .attr("stroke", "rgb(0,199,199)")
+        .attr("stroke-width", ".5px");
 }
 
 /**
