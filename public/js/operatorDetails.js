@@ -10,12 +10,12 @@ OperatorDetails.prototype.init = function() {
     var self = this;
 
     var margin = {
-        top: 100,
-        right: 20,
-        bottom: 50,
-        left: 70
+        top: 30,
+        right: 5,
+        bottom: 80,
+        left: 5
     }
-    width = 400 - margin.left - margin.right,
+    width = 410 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
 
@@ -23,8 +23,8 @@ OperatorDetails.prototype.init = function() {
 
     //creates svg elements within the div
     self.operatorDetailsSvg = divOperatorDetails.append("svg")
-        .attr("width", width*2)
-        .attr("height", height*2)
+        .attr("width", width)
+        .attr("height", height)
         .attr("class", "operatorDetailsSvg")
         .attr("transform", "translate(" + margin.left + ",0)")
 }
