@@ -30,6 +30,22 @@ nav{
 
 }
 
+.nav1 {
+    position: absolute;
+    top: 15px; left: 50px;
+    height:40px;
+    width: 170px;
+    display: flex;
+    margin-top: 10px;
+    /*justify-content: space-between;*/
+    background-color: #bafffd;
+    border-width: 1px;
+    border-color: #36e9ff;
+    stroke: #84efff;
+    color: #0c0262;
+    border-radius: 10px;
+}
+
 h1 {
     font-family: "HK Grotesk";
     font-weight: lighter;
