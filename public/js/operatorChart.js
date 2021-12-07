@@ -69,13 +69,13 @@ function updateData(data) {
     yearFatalityCount.forEach(element => {
         // Convert values to date and int
         element.key = new Date(element.key, 0);
-        element.key = element.key.getFullYear();
+        element.key = element.key;
     });
 
     yearAboardCount.forEach(element => {
         // Convert values to date and int
         element.key = new Date(element.key, 0);
-        element.key = element.key.getFullYear();
+        element.key = element.key;
     });
 
     x.domain(yearFatalityCount.map(function (d2) {
@@ -131,7 +131,7 @@ function updateData(data) {
             // console.log(element.key);
             // var year = element.key.getFullYear();
             // console.log(yearAboardCount.get(element.key));
-            tooltip.html("YEAR: " + element.key + "<br>" + "Total # Aboard: " + element.value).style("visibility", "visible").style("font-weight", "bold");
+            tooltip.html("YEAR: " + element.key.getFullYear() + "<br>" + "Total # Aboard: " + element.value).style("visibility", "visible").style("font-weight", "bold");
         })
         .on("mousemove", function(){
             tooltip
@@ -140,7 +140,7 @@ function updateData(data) {
         })
         .on("mouseout", function(d) {
             var element = d.srcElement.__data__;
-            tooltip.html("YEAR: " + element.key + "<br>" + "Total # Aboard: " + element.value).style("visibility", "hidden");
+            tooltip.html("YEAR: " + element.key.getFullYear() + "<br>" + "Total # Aboard: " + element.value).style("visibility", "hidden");
         })
         .on("click", function(d) {
             console.log("clicked");
@@ -148,7 +148,7 @@ function updateData(data) {
             console.log(element);
             var filteredData = data.filter(function (d2) {
                 var date = new Date(d2.Date);
-                return date.getFullYear() == element.key;
+                return date.getFullYear() == element.key.getFullYear();
             });
             console.log(filteredData);
             console.log("removing operatorDetailsSvg");
@@ -157,7 +157,7 @@ function updateData(data) {
 
             var operator = d3.select(".form-select").property("value");
 
-            document.getElementById("incidentsTitle").innerHTML =  operator + " Crash Incidents in " + element.key;
+            document.getElementById("incidentsTitle").innerHTML =  operator + " Crash Incidents in " + element.key.getFullYear();
         });
 
     barsFatalities.enter()
@@ -177,7 +177,7 @@ function updateData(data) {
         // (taken from: https://perials.github.io/responsive-bar-chart-with-d3/)
         .on("mouseover", function(d) {
             var element = d.srcElement.__data__;
-            tooltip.html("YEAR: " + element.key + "<br>" + "Total # Fatalities: " + element.value).style("visibility", "visible");
+            tooltip.html("YEAR: " + element.key.getFullYear() + "<br>" + "Total # Fatalities: " + element.value).style("visibility", "visible");
         })
         .on("mousemove", function(){
             tooltip
@@ -186,7 +186,7 @@ function updateData(data) {
         })
         .on("mouseout", function(d) {
             var element = d.srcElement.__data__;
-            tooltip.html("YEAR: " + element.key + "<br>" + "Total # Fatalities: " + element.value).style("visibility", "hidden");
+            tooltip.html("YEAR: " + element.key.getFullYear() + "<br>" + "Total # Fatalities: " + element.value).style("visibility", "hidden");
         })
         .on("click", function(d) {
             console.log("clicked");
@@ -194,7 +194,7 @@ function updateData(data) {
             console.log(element);
             var filteredData = data.filter(function (d2) {
                 var date = new Date(d2.Date);
-                return date.getFullYear() == element.key;
+                return date.getFullYear() == element.key.getFullYear();
             });
             console.log(filteredData);
             console.log("removing operatorDetailsSvg");
@@ -203,7 +203,7 @@ function updateData(data) {
 
             var operator = d3.select(".form-select").property("value");
 
-            document.getElementById("incidentsTitle").innerHTML =  operator + " Crash Incidents in " + element.key;
+            document.getElementById("incidentsTitle").innerHTML =  operator + " Crash Incidents in " + element.key.getFullYear();
         });
 
 

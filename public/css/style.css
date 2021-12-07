@@ -245,6 +245,10 @@ a.selected{
     /*width: 60%;*/
 }
 
+.operatorChartSvg {
+    padding-left: 50px;
+}
+
 .form-select {
     color: white;
     background-color: rgba(73, 60, 255, 0.35);
