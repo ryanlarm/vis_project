@@ -18,7 +18,7 @@ html, body {
 
 nav{
     position: absolute;
-    top: 15px; left: 1050px;
+    top: 15px; right: 30px;
     height:40px;
     width: 340px;
     display: flex;
