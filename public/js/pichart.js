@@ -128,7 +128,81 @@ PiChart.prototype.updateVis = function() {
         .data(self.pie(self.displayData))
         .enter()
         .append("g")
-            .attr("class", "arc");
+            .attr("class", "arc")
+        .on("mouseover", function(d) {
+
+            self.svg.selectAll(".aircraftDetails")
+                .remove()
+                .exit();
+
+            var aircraftDetails = self.svg.append("g")
+                .attr("class", "aircraftDetails");
+
+            var totalCharacters = 0;
+            var addAnotherLine = false;
+            var indexToStartLine = 0;
+
+            aircraftDetails
+                .append("text")
+                .attr("x", -110)
+                .attr("y", -50)
+                .attr("font-family","HK Grotesk")
+                .attr("font-style","bold")
+                .attr("font-size","20px")
+                .attr("fill", "white")
+                .text(function(d1) {
+                    var str = "Aircraft: ";
+                    const aircraftNameChunks = d.toElement.__data__.data.aircraft.split(" ");
+
+                    aircraftNameChunks.forEach(function (chunk, index) {
+                        totalCharacters += chunk.length;
+
+                        if (totalCharacters < 20) {
+                            str = str + chunk + " ";
+                        }
+                        else {
+                            if (!addAnotherLine) {
+                                addAnotherLine = true;
+                                indexToStartLine = index;
+                            }
+                        }
+                    });
+
+                    return str;
+                });
+
+
+            if (addAnotherLine) {
+                aircraftDetails
+                    .append("text")
+                    .attr("x", -110)
+                    .attr("y", -30)
+                    .attr("fill", "white")
+                    .attr("font-family","HK Grotesk")
+                    .attr("font-style","bold")
+                    .attr("font-size","20px")
+                    .text(function(d1) {
+                        var str = "";
+                        const aircraftNameChunks = d.toElement.__data__.data.aircraft.split(" ");
+
+                        for (let i = indexToStartLine; i < aircraftNameChunks.length; i++) {
+                            str = str + aircraftNameChunks[i] + " ";
+                        }
+
+                        return str;
+                    });
+            }
+
+            aircraftDetails
+                .append("text")
+                .attr("x", -80)
+                .attr("y", 20)
+                .attr("font-family","Space Mono")
+                .attr("font-style","bold")
+                .attr("font-size","18px")
+                .attr("fill", "rgb(0,199,199)")
+                .text("Crashes: " + d.toElement.__data__.data.count);
+        });
 
     self.arcs.append("path")
         .attr("fill", function(d) {
