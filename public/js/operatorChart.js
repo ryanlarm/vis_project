@@ -2,10 +2,10 @@ var margin = {
         top: 30,
         right: 5,
         bottom: 80,
-        left: 65
+        left: 55
     },
-    width = 960 - margin.left - margin.right,
-    height = 450 - margin.top - margin.bottom;
+    width = 850 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 var svg = d3.select("#operatorChart").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -227,7 +227,7 @@ function updateData(data) {
     svg.append("text")
         .attr("class", "axis-title")
         .attr("x", -150)
-        .attr("y", -50)
+        .attr("y", -45)
         .attr("transform", "rotate(-90)")
         .attr("dy", ".1em")
         .attr("font-family", "Space Mono")
@@ -239,7 +239,7 @@ function updateData(data) {
     svg.append("text")
         .attr("class", "axis-title")
         .attr("x", 380)
-        .attr("y", 457)
+        .attr("y", 447)
         .attr("dy", ".1em")
         .attr("font-family", "Space Mono")
         .attr("font-style", "italic")
@@ -271,7 +271,7 @@ d3.csv("data/crashes.csv").then(function (data) {
         return operatorTotalFatalities.get(b) - operatorTotalFatalities.get(a);
     });
 
-    console.log(uniqueOperators);
+    // console.log(uniqueOperators);
 
     uniqueOperators.unshift("All Operators");
 
