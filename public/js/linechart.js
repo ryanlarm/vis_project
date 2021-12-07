@@ -21,7 +21,7 @@ LineChart.prototype.init = function() {
 
     let divLineChart = d3.select("#" + self.parent).classed("linechart", true);
 
-    self.margin = {top: 20, right: 20, bottom: 20, left: 50};
+    self.margin = {top: 20, right: 20, bottom: 60, left: 50};
     self.svgBounds = divLineChart.node().getBoundingClientRect();
     self.svgWidth = self.svgBounds.width - self.margin.left - self.margin.right;
     self.svgHeight = 500 - self.margin.top - self.margin.bottom;
@@ -68,25 +68,27 @@ LineChart.prototype.init = function() {
 
    self.svg.append("text")
         .attr("class", "axis-title")
-        .attr("x", -120)
-        .attr("y", -50)
+        .attr("x", -180)
+        .attr("y", -41)
         .attr("transform", "rotate(-90)")
         .attr("dy", ".1em")
         .attr("font-family", "Space Mono")
+        .attr("font-size", "14px")
         .attr("fill", "white")
         .style("text-anchor", "end")
         .text("# of CRASHES");
 
     self.svg.append("text")
         .attr("class", "axis-title")
-        .attr("x", 400)
+        .attr("x", 300)
         .attr("y", 477)
         .attr("dy", ".1em")
         .attr("font-family", "Space Mono")
         .attr("font-style", "italic")
+        .attr("font-size", "14px")
         .attr("fill", "white")
         .style("text-anchor", "end")
-        .text("year");
+        .text("YEAR");
 
     self.wrangleData();
 }
