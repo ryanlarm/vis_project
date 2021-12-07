@@ -1,10 +1,10 @@
 var margin = {
-        top: 50,
-        right: 20,
+        top: 30,
+        right: 5,
         bottom: 80,
-        left: 20
+        left: 65
     },
-    width = 800 - margin.left - margin.right,
+    width = 818 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var svg = d3.select("#operatorChart").append("svg")
@@ -215,6 +215,7 @@ function updateData(data) {
         .attr("y", 0)
         .attr("x", 9)
         .attr("dy", ".35em")
+        .attr("color", "rgba(96, 241, 255, 0.66)")
         .attr("transform", "rotate(90)")
         .style("text-anchor", "start");
 
@@ -225,25 +226,26 @@ function updateData(data) {
 
     svg.append("text")
         .attr("class", "axis-title")
-        .attr("x", -120)
+        .attr("x", -150)
         .attr("y", -50)
         .attr("transform", "rotate(-90)")
         .attr("dy", ".1em")
         .attr("font-family", "Space Mono")
-        .attr("fill", "white")
+        .attr("font-size", "12px")
+        .attr("fill", "rgb(145,131,255)")
         .style("text-anchor", "end")
         .text("# of CASUALTIES");
 
     svg.append("text")
         .attr("class", "axis-title")
-        .attr("x", 470)
-        .attr("y", 447)
+        .attr("x", 380)
+        .attr("y", 457)
         .attr("dy", ".1em")
         .attr("font-family", "Space Mono")
         .attr("font-style", "italic")
-        .attr("fill", "white")
+        .attr("fill", "rgb(145,131,255)")
         .style("text-anchor", "end")
-        .text("year");
+        .text("YEAR");
 }
 
 function getOperatorTotalFatalities(data) {
